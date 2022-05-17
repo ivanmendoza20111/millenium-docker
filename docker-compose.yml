@@ -1,0 +1,31 @@
+version: "2"
+services:
+  millenium-group-backend:
+    image: ntidev/php:7.4.6-fpm-buster
+    container_name: millenium-group-backend
+    restart: always
+    volumes:
+      - ./data:/var/www/data
+      - ./backend:/var/www/html
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+
+  millenium-group-frontend:
+    image: ntidev/nginx:4
+    container_name: millenium-group-frontend
+    restart: always
+    environment:
+      - PHP_UPSTREAM_CONTAINER=millenium-group-backend
+    env_file:
+      - .env
+    ports:
+      - "8882:80"
+    volumes:
+      - ./backend:/var/www/html
+
+networks:
+  default:
+    external:
+      name: docker_default

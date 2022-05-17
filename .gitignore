@@ -1,0 +1,20 @@
+# Source files
+frontend/
+backend/
+docker/php/app/
+docker/nginx/app/
+
+# Editors
+.idea/
+.vscode/
+
+# Environment
+.env
+
+# Build
+build/
+
+# App directories
+data/
+spool/
+sessions/
